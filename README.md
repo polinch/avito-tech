@@ -28,5 +28,5 @@
 |Метод HTTP|URL|Действие|
 |---|---|---|
 |GET|/ads?page=page_number|Получить список объявлений|
-|GET|/ads/<id>?parameter=fields|Получить конкретное объявление|
+|GET|/ads/id?parameter=fields|Получить конкретное объявление|
 |POST|/new|Создать объявление|
