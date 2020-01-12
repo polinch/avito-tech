@@ -1,6 +1,0 @@
-UPDATE public.ad SET name = 'testname2', photo1 = 'testurl', photo2 = 'testurl', photo3 = 'testurl', price = 200, description = 'testdescription', created_date = '2020-01-11' WHERE id = 1;
-UPDATE public.ad SET name = 'testname12', photo1 = 'testurl1', photo2 = 'testurl2', photo3 = 'testurl3', price = 5000, description = '12testdescription', created_date = '2020-01-11' WHERE id = 2;
-UPDATE public.ad SET name = 'testad', photo1 = 'url1', photo2 = 'url2', photo3 = 'url3', price = 4000, description = 'desckjhkjnkll;', created_date = '2020-01-11' WHERE id = 4;
-UPDATE public.ad SET name = 'tesfghjkltad', photo1 = 'url1', photo2 = 'url2', photo3 = 'url3', price = 4000, description = 'desckjhkjnklldzgxfhc;', created_date = '2020-01-11' WHERE id = 5;
-UPDATE public.ad SET name = 'tesfghjkltad', photo1 = 'url1', photo2 = 'url2', photo3 = 'url3', price = 405600, description = 'desckjhkjnklldzgxfhc;', created_date = '2020-01-11' WHERE id = 6;
-UPDATE public.ad SET name = 'tesfghjkltad', photo1 = 'url1', photo2 = 'url2', photo3 = 'url3', price = 405600, description = ' qafesdgsdg ', created_date = '2020-01-11' WHERE id = 7;
