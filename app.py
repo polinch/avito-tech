@@ -6,6 +6,12 @@ import flask
 import psycopg2
 
 AD_PER_PAGE = 10
+POSTGRES = {
+    'dbname': 'avito_test',
+    'user': 'postgres',
+    'password': '1234',
+    'host': 'localhost'
+}
 
 app = flask.Flask(__name__)
 
@@ -37,15 +43,20 @@ schema = {
 
 
 def connect_to_db():
-    conn = psycopg2.connect(dbname='avito_test', user='postgres', password='1234', host='localhost')
+
+    conn = psycopg2.connect(dbname=POSTGRES['dbname'], user=POSTGRES['user'], password=POSTGRES['password'],
+                            host=POSTGRES['host'])
+
     return conn
 
 
 def to_json(data):
+
     return json.dumps(data, indent=2) + "\n"
 
 
 def response(code, data):
+
     return flask.Response(
         status=code,
         mimetype="application/json",
@@ -63,6 +74,7 @@ def response(code, data):
 
 @app.route('/ads', methods=['GET'])
 def get_ads():
+
     try:
         page = int(flask.request.args.get("page"))
     except ValueError:
@@ -71,6 +83,7 @@ def get_ads():
         return response(400, {})
     sort_date = flask.request.args.get('sort_date')
     sort_price = flask.request.args.get('sort_price')
+
     with closing(connect_to_db()) as conn:
         with conn.cursor() as cursor:
             offset = AD_PER_PAGE * (page - 1)
@@ -104,11 +117,15 @@ def get_ads():
             for row in cursor.fetchall():
                 results.append(dict(zip(columns, row)))
 
+    if len(results) == 0:
+        return response(404, {})
+
     return response(200, {"Ads": results})
 
 
 @app.route('/ads/<int:ad_id>', methods=['GET'])
 def get_ad(ad_id):
+
     parameter = flask.request.args.get('parameter')
     with closing(connect_to_db()) as conn:
         with conn.cursor() as cursor:
@@ -125,11 +142,15 @@ def get_ad(ad_id):
             else:
                 return response(400, {})
 
+    if len(results) == 0:
+        return response(404, {})
+
     return response(200, {"Ad": results[0]})
 
 
 @app.route('/ads', methods=['POST'])
 def create_new_ad():
+
     ad_json = flask.request.get_json()
     if ad_json is None:
         return response(400, {})
@@ -149,6 +170,7 @@ def create_new_ad():
                     result = []
                     for row in cursor.fetchall():
                         result.append({"id": row[0]})
+
             return response(200, result[0])
 
 
